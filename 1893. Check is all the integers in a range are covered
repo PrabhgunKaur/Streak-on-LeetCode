@@ -1,0 +1,18 @@
+bool isCovered(int** ranges, int rangesSize, int* rangesColSize, int left, int right) {
+    int ran[52]={0};       //array creation and assigning 
+    for(int i=0; i<rangesSize; i++) {
+        int start = ranges[i][0];
+        int end = ranges[i][1];
+        ran[start]++;
+        ran[end+1]--;
+    }
+    for(int i=1; i<52; i++) {              //prefix sum
+        ran[i]= ran[i] + ran[i-1];
+    }
+    for(int i=left; i<=right; i++) {
+        if (ran[i]<=0) {
+            return false;
+        }
+    }
+    return true;
+}
