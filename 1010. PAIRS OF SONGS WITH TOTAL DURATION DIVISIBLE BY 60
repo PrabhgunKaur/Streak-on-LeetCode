@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int numPairsDivisibleBy60(vector<int>& time) {
+        unordered_map<int, int>mp;
+        int result = 0;
+        for(int t : time) {
+            int r = t%60;
+            int complement = (60 - r) % 60;
+            //if complement exists, add its count to result
+            if (mp.find(complement) != mp.end()) {
+                result += mp[complement];
+            }
+            //add current remainder to map for fututre songs
+            mp[r]++;
+        }
+        return result;
+    }
+};
