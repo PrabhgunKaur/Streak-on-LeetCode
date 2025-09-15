@@ -1,0 +1,24 @@
+#include <stdlib.h> // For qsort
+
+// The comparison function for qsort
+int cmp(const void *a, const void *b) {
+    // Correctly dereference the void pointers to access the integer values
+    int val_a = *(const int*)a;
+    int val_b = *(const int*)b;
+    
+    if (val_a > val_b) {
+        return 1;
+    } else if (val_a < val_b) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+int findKthLargest(int *nums, int numsSize, int k) {
+    // Sort the array in ascending order
+    qsort(nums, numsSize, sizeof(int), cmp);
+    
+    // The k-th largest element will be at index numsSize - k
+    return nums[numsSize - k];
+}
