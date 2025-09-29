@@ -1,0 +1,27 @@
+class Solution {
+public:
+    std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
+        // Use an unordered_map where the key is the sorted string 
+        // (the canonical representation of an anagram group) 
+        // and the value is a vector of all strings belonging to that group.
+        std::unordered_map<std::string, std::vector<std::string>> mp;
+        
+        for (const std::string& s : strs) {
+            std::string key = s;
+            // Sort the string to create the unique key for the anagram group
+            std::sort(key.begin(), key.end());
+            
+            // Add the original string to the vector associated with the sorted key
+            mp[key].push_back(s);
+        }
+        
+        // Collect all the groups (the values from the map) into the result vector
+        std::vector<std::vector<std::string>> result;
+        for (auto const& entry : mp) {
+            result.push_back(entry.second);
+        }
+        
+        // The function must return the result vector
+        return result;
+    }
+};
