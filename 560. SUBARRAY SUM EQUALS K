@@ -9,36 +9,19 @@ public:
      * * The hash map stores the frequency of all prefix sums encountered so far.
      */
     int subarraySum(vector<int>& nums, int k) {
-        // Map to store the frequency of prefix sums encountered so far.
-        // Key: prefix sum (sum[0..j])
-        // Value: count of times that sum has occurred
         unordered_map<int, int> prefix_sum_counts;
-        
-        // Initialize the map with sum 0 having a count of 1.
-        // This handles the case where the subarray starts from index 0
-        // (i.e., when (current_sum - k) is 0).
         prefix_sum_counts[0] = 1;
         
         int current_sum = 0;
         int count = 0;
         
         for (int num : nums) {
-            // 1. Update the current prefix sum
             current_sum += num;
-            
-            // 2. Check if a subarray ending at the current index (j) exists 
-            //    with the target sum k.
-            // We look for a previous prefix sum (sum[0..i-1]) such that:
-            // prefix_sum_i_minus_1 = current_sum - k
             int required_prefix_sum = current_sum - k;
             
             if (prefix_sum_counts.count(required_prefix_sum)) {
-                // If it exists, add its count to the total count.
-                // Each occurrence means a valid start index 'i' has been found.
                 count += prefix_sum_counts[required_prefix_sum];
             }
-            
-            // 3. Update the frequency of the current prefix sum
             prefix_sum_counts[current_sum]++;
         }
         
