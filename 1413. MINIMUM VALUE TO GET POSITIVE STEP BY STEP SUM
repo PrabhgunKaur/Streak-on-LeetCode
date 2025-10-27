@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minStartValue(vector<int>& nums) {
+        int sum=0;
+        int minValue = INT_MAX;
+        for(int a : nums){
+            sum += a;
+            minValue = min(minValue, sum);
+        }
+        if(minValue<0){
+            return 1-minValue;
+        }
+        return 1;
+    }
+};
