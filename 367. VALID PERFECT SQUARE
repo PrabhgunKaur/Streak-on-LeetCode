@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        if (num < 1) {
+            return false;
+        }
+        if (num == 1) {
+            return true;
+        }
+        long long low = 1;
+        long long high = num / 2; // Optimization: the root can't be greater than num/2 for num > 1
+        
+        while (low <= high) {
+            long long mid = low + (high - low) / 2;
+            long long square = mid * mid;
+            
+            if (square == num) {
+                return true;
+            } else if (square < num) {
+                low = mid + 1;
+            } else { 
+                high = mid - 1;
+            }
+        }
+        return false;
+    }
+};
